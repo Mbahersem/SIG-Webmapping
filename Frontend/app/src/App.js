@@ -12,9 +12,9 @@ L.Icon.Default.mergeOptions({
 });
 
 function App() {
-  const position = [7.3697, 12.3547]; // Coordonnées du Cameroun
-  const zoom = 6;
-  const minzoom = 6;
+  const position = [7.3697, 10.3547]; // Coordonnées du Cameroun
+  const zoom = 7;
+  const minzoom = 7;
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
@@ -23,9 +23,6 @@ function App() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        <Marker position={position}>
-          <Popup> Cameroun </Popup>
-        </Marker>
       </MapContainer>
     </div>
   );
