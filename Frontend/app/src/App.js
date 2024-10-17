@@ -2,7 +2,9 @@ import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-//import './App.css';
+import './App.css';
+
+import '../components/DetailedMap';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -12,18 +14,24 @@ L.Icon.Default.mergeOptions({
 });
 
 function App() {
-  const position = [7.3697, 10.3547]; // Coordonnées du Cameroun
-  const zoom = 7;
-  const minzoom = 7;
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
-      <MapContainer center={position} zoom={zoom} minZoom={minzoom} style={{ height: '100%', width: '100%' }} scrollWheelZoom={true}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-      </MapContainer>
+      <DetailedMap/>
+      <div className="header" style={{ position: 'absolute', zIndex: 1000 }}>
+        <div className="flag-color"></div> <div className="flag-color">★</div>
+        <div className="flag-color">PRESIDENTIELLES 2025</div>
+      </div>
+      <div style={{ position: 'absolute', zIndex: 1000, 
+        width: '40px',
+        height: '40px',
+        right: '60px', 
+        bottom: '60px', 
+        fontSize: '30px', 
+        padding: '15px', 
+        borderRadius: '100px',
+        backgroundColor: '#fff'
+       }}>&nbsp;🞋</div>
     </div>
   );
 }
