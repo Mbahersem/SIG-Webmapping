@@ -1,0 +1,57 @@
+.results-container {
+  font-family: Arial, sans-serif;
+  background-image:url(../img/resultat.png);
+  height: 100vh;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.content {
+  display: flex;
+  gap: 20px;
+}
+
+.left-panel {
+  width: 200px;
+  height: 300px;
+  background-image:url(../img/cameroun.jpg);
+  background-size: cover; /* Pour couvrir toute la boîte */
+  background-position: center; /* Centrer l'image */
+}
+
+.right-panel {
+  flex-grow: 1;
+}
+
+.table {
+  width: 100%; /* Largeur du tableau */
+  border-collapse: collapse; /* Pour que les bordures se chevauchent */
+}
+
+.table-row {
+  border-bottom: 1px solid #ccc; /* Bordure entre les lignes */
+}
+
+.table-cell {
+  padding: 1rem; /* Espace intérieur des cellules */
+  text-align: left; /* Alignement du texte à gauche */
+  border-right: 1px solid #ccc; /* Bordure à droite des cellules */
+}
+
+.table-cell:last-child {
+  border-right: none; /* Pas de bordure à droite pour la dernière cellule */
+}
+.select{
+  padding: 0.5rem; /* Réduire l'espace intérieur si nécessaire */
+  border: 1px solid #ccc; /* Bordure */
+  border-radius: 5px; /* Coins arrondis */
+  font-size: 1rem; /* Taille de la police */
+  width: 50px; /* Réduire la largeur du select */
+  box-sizing:100px;/*le padding et la bordure dans la largeur totale */
+  padding-right: 100px;
+}
