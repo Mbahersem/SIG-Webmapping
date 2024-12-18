@@ -21,6 +21,12 @@ CREATE TABLE Polling_Station (
     geom GEOMETRY(Point, 4326) -- Using WGS 84 coordinate system
 );
 
+-- Constraint on the geometry of the Polling_Station
+ALTER TABLE Polling_Station
+ADD CONSTRAINT polling_station_geom_point_chk
+CHECK (ST_GeometryType(geom) = 'ST_Point'::text
+OR geom is NULL);
+
 -- Create the Party table
 CREATE TABLE Party (
     party_id SERIAL PRIMARY KEY,
