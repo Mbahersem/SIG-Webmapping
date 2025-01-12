@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
+import { pool } from './database/db';
 import { challengerRouter } from './api/challengerRoutes';
 import { electorRouter } from './api/electorRoutes';
 import { resultRouter } from './api/resultRoutes';
