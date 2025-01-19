@@ -19,7 +19,7 @@ class Challenger {
     }
 
     getChallenger(idScrut) {
-        pool.query("SELECT * FROM Scrutateur WHERE id_scrut = $1", [idScrut], (err, result) => {
+        return pool.query("SELECT * FROM Scrutateur WHERE id_scrut = $1", [idScrut], (err, result) => {
             if(err) {
                 throw err;
             }

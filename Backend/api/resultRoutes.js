@@ -2,17 +2,19 @@ import { Router } from 'express';
 
 import { sendData } from './socketStreamManager';
 
+import { CountBureauPerParty } from '../database/model/countBureauPerParty';
+const model = new CountBureauPerParty(); 
+
 const resultRouter = Router();
 
-resultRouter.post('/post', async (req, res) => {
+resultRouter.post('/post/:bureau', async (req, res) => {
     const data = null;
 
     try {
-        const dataToSave = await data.save();
 
-        sendData(data)
+       dataSaved =  model.countVotes(req.params.bureau, req.body.party, req.body.count)
 
-        res.status(200).json(dataToSave)
+        res.status(200).json(dataSaved)
     }
     catch (error) {
         res.status(400).json({message: error.message})
