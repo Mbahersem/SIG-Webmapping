@@ -11,4 +11,4 @@ const CustomPopup = ({ feature }) => {
       </div>
     );
   };
-  
+ export default CustomPopup;
