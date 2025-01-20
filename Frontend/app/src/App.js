@@ -21,8 +21,8 @@ function App() {
       <div className="header" style={{ position: 'absolute', zIndex: 1000 }}>
         <div className="flag-color"></div> <div className="flag-color">★</div>
         <div className="flag-color">PRESIDENTIELLES 2025</div>
-      </div>
-      <div style={{ position: 'absolute', zIndex: 1000, 
+       </div>
+      {/*<div style={{ position: 'absolute', zIndex: 1000, 
         width: '40px',
         height: '40px',
         right: '60px', 
@@ -31,8 +31,8 @@ function App() {
         padding: '15px', 
         borderRadius: '100px',
         backgroundColor: '#fff'
-       }}>&nbsp;🞋</div>
-    </div>
+       }}>&nbsp;🞋</div> */}
+    </div> 
   );
 }
 

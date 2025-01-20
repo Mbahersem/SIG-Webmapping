@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import './map.css'; // Importation du fichier CSS
 
 import CustomPopup from './CustomPopup.js';
 
@@ -41,7 +43,7 @@ const DetailedMap = () => {
 
         	fetch(`/geojson/geoBoundaries-CMR-ADM${fileNumber}_simplified.geojson`)
         	     .then(response => response.json())
-        	     .then(data => setData(data))
+        	     .then(data => {setData(data);console.log(data);})
         	     .catch(error => console.error('Error fetching GeoJSON:',error));
         	return null;
              
@@ -76,7 +78,9 @@ const DetailedMap = () => {
                 layer.setStyle(styleFeature(feature)); // Rétablir le style original
             },
             click: (e) => {
-                const popupContent = <CustomPopup feature={feature} />;
+                const popupContent = document.createElement('div');
+            // Rendre le composant React dans le conteneur
+            	ReactDOM.render(<CustomPopup feature={feature} />, popupContent);
                 layer.bindPopup(popupContent).openPopup();
             },
         });
@@ -102,6 +106,15 @@ const DetailedMap = () => {
             {zoom >= 9 && arrondissementsData && (
                 <GeoJSON data={arrondissementsData} style={styleFeature} onEachFeature={onEachFeature} />
             )}
+            
+            <div className="legend">
+		<h3>Légende</h3>
+		<i style={{ background: 'green' }}></i><span>RDPC</span><br />
+		<i style={{ background: 'red' }}></i><span>UPC</span><br />
+		<i style={{ background: 'orange' }}></i><span>UDC</span><br />
+		<i style={{ background: 'yellow' }}></i><span>BDC</span><br />
+		<i style={{ background: 'grey' }}></i><span>SDF</span><br />
+           </div>
         </MapContainer>
     );
 }
