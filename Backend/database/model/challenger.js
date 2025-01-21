@@ -1,4 +1,4 @@
-import { pool } from '../db';
+import { pool } from '../db.js';
 
 class Challenger {
     // constructor(name, birthDate, nameBureau, idAdmin) {
@@ -8,31 +8,20 @@ class Challenger {
     //     this.idAdmin = idAdmin;
     // }
 
-    addChallenger(name, birthDate, nameBureau, idAdmin) {
-        pool.query("INSERT INTO Scrutateur (nom_scrut, date_naiss_scrut, nom_bureau, id_admin) " + 
-        "VALUES ($1, $2, $3, $4)", [name, birthDate, nameBureau, idAdmin], (err, result) => {
-            if(err) {
-                throw err;
-            }
-            return result.rows[0];
-        });
+    async addChallenger(name, birthDate, nameBureau, idAdmin) {
+        const { rows } = await pool.query("INSERT INTO Scrutateur (nom_scrut, date_naiss_scrut, nom_bureau, id_admin) " + 
+        "VALUES ($1, $2, $3, $4)", [name, birthDate, nameBureau, idAdmin]);
+        return rows;
     }
 
-    getChallenger(idScrut) {
-        return pool.query("SELECT * FROM Scrutateur WHERE id_scrut = $1", [idScrut], (err, result) => {
-            if(err) {
-                throw err;
-            }
-            return result.rows[0];
-        });
+    async getChallenger(idScrut) {
+        const { rows } = await pool.query("SELECT * FROM Scrutateur WHERE id_scrut = $1", [idScrut]);
+        return rows;
     }
 
-    deleteChallenger(idScrut) {
-        pool.query("DELETE FROM Scrutateur WHERE id_scrut = $1", [idScrut], (err, result) => {
-            if(err) {
-                throw err;
-            }
-        });        
+    async deleteChallenger(idScrut) {
+        const { rows } = await pool.query("DELETE FROM Scrutateur WHERE id_scrut = $1", [idScrut]); 
+        return rows;       
     }
 }
 

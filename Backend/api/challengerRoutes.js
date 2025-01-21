@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { Challenger } from '../database/model/challenger';
+import { Challenger } from '../database/model/challenger.js';
 const model = new Challenger()
 
 const challengerRouter = Router();
@@ -9,7 +9,7 @@ const challengerRouter = Router();
 challengerRouter.post('/post', async (req, res) => {
 
     try {
-        model.addChallenger(req.body.name, req.body.birthDate, req.body.bureau, req.body.admin)
+        await model.addChallenger(req.body.name, req.body.birthDate, req.body.bureau, req.body.admin)
 
         res.status(200)
     }
@@ -30,7 +30,7 @@ challengerRouter.get('/getAll', async (req, res) => {
 //Get by ID Method
 challengerRouter.get('/get/:id', async (req, res) => {
     try{
-        const data = model.getChallenger(req.params.id)
+        const data = await model.getChallenger(req.params.id)
         res.json(data)
     }
     catch(error){
@@ -52,7 +52,7 @@ challengerRouter.patch('/update/:id', async (req, res) => {
 //Delete by ID Method
 challengerRouter.delete('/delete/:id', async (req, res) => {
     try {
-        model.deleteChallenger(req.params.id)
+        await model.deleteChallenger(req.params.id)
         res.send(`Document with ${req.params.id} has been deleted..`)
     }
     catch (error) {

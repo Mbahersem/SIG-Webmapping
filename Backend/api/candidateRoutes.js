@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { Candidate } from '../database/model/candidate';
+import { Candidate } from '../database/model/candidate.js';
 const model = new Candidate()
 
 const candidateRouter = Router();
@@ -9,7 +9,7 @@ const candidateRouter = Router();
 candidateRouter.post('/post', async (req, res) => {
 
     try {
-        model.addCandidate(req.body.party, req.body.name)
+        await model.addCandidate(req.body.party, req.body.name)
 
         res.status(200)
     }
@@ -21,7 +21,7 @@ candidateRouter.post('/post', async (req, res) => {
 //Get all Method
 candidateRouter.get('/getAll', async (req, res) => {
     try{
-        data = model.getCandidates()
+        data = await model.getCandidates()
         res.status(200).send(data)
     }
     catch(error){
@@ -31,7 +31,7 @@ candidateRouter.get('/getAll', async (req, res) => {
 //Get by ID Method
 candidateRouter.get('/get/:id', async (req, res) => {
     try{
-        const data = model.getCandidate(req.params.id)
+        const data = await model.getCandidate(req.params.id)
         res.status(200).json(data)
     }
     catch(error){
@@ -43,7 +43,7 @@ candidateRouter.get('/get/:id', async (req, res) => {
 //Update by ID Method
 candidateRouter.patch('/update/:id', async (req, res) => {
     try {
-        model.changeCandidate(req.params.id, req.body.name)
+        await model.changeCandidate(req.params.id, req.body.name)
         res.status(200)
     }
     catch (error) {

@@ -1,41 +1,25 @@
-import { pool } from '../db';
+import { pool } from '../db.js';
 
 class Candidate {
-    addCandidate(nameParty, nameCandidate) {
-        pool.query("INSERT INTO Candidat (nom_parti, nom_candidat) " + 
-        "VALUES ($1, $2)", [nameParty, nameCandidate], (err, result) => {
-            if(err) {
-                throw err;
-            }
-            return result.rows[0];
-        });
+    async addCandidate(nameParty, nameCandidate) {
+        const { rows } = await pool.query("INSERT INTO Candidat (nom_parti, nom_candidat) " + 
+        "VALUES ($1, $2)", [nameParty, nameCandidate]);
+        return rows;
     }
 
-    getCandidates() {
-        pool.query("SELECT * FROM Candidat", (err, result) => {
-            if(err) {
-                throw err;
-            }
-            return result.rows;
-        })
+    async getCandidates() {
+        const { rows } = await pool.query("SELECT * FROM Candidat");
+        return rows;
     }
 
-    getCandidate(idParty) {
-        pool.query("SELECT * FROM Candidat WHERE id_parti = $1", [idParty], (err, result) => {
-            if(err) {
-                throw err;
-            }
-            return result.rows[0];
-        });
+    async getCandidate(idParty) {
+        const { rows } = await pool.query("SELECT * FROM Candidat WHERE id_parti = $1", [idParty]);
+        return rows;
     }
 
-    changeCandidate(idParty, name) {
-        pool.query("UPDATE Candidat SET nom_candidat = $1 WHERE id_parti = $2", [name, idParty], (err, result) => {
-            if(err) {
-                throw err;
-            }
-            return result.rows[0];
-        })
+    async changeCandidate(idParty, name) {
+        const { rows } = await pool.query("UPDATE Candidat SET nom_candidat = $1 WHERE id_parti = $2", [name, idParty]);
+        return rows;
     }
 }
 

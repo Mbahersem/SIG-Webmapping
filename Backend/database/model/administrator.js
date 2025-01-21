@@ -1,31 +1,20 @@
-import { pool } from '../db';
+import { pool } from '../db.js';
 
 class Administrator {
-    addAdministrator(name, birthDate) {
-        pool.query("INSERT INTO Administrateur (nom_admin, date_naiss_admin) " + 
-        "VALUES ($1, $2)", [name, birthDate], (err, result) => {
-            if(err) {
-                throw err;
-            }
-            return result.rows[0];
-        });
+    async addAdministrator(name, birthDate) {
+        const { rows } = await pool.query("INSERT INTO Administrateur (nom_admin, date_naiss_admin) " + 
+        "VALUES ($1, $2)", [name, birthDate]);
+        return rows;
     }
 
-    getAdministrator(idAdmin) {
-        pool.query("SELECT * FROM Administrateur WHERE id_admin = $1", [idAdmin], (err, result) => {
-            if(err) {
-                throw err;
-            }
-            return result.rows[0];
-        });
+    async getAdministrator(idAdmin) {
+        const { rows } = await pool.query("SELECT * FROM Administrateur WHERE id_admin = $1", [idAdmin]);
+        return rows;
     }
 
-    deleteAdministrator(idAdmin) {
-        pool.query("DELETE FROM Administrateur WHERE id_admin = $1", [idAdmin], (err, result) => {
-            if(err) {
-                throw err;
-            }
-        });        
+    async deleteAdministrator(idAdmin) {
+        const { rows } = await pool.query("DELETE FROM Administrateur WHERE id_admin = $1", [idAdmin]); 
+        return rows;       
     }
 }
 

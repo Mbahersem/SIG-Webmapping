@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { Administrator } from '../database/model/administrator';
+import { Administrator } from '../database/model/administrator.js';
 const model = new Administrator()
 
 const adminRouter = Router();
@@ -9,7 +9,7 @@ const adminRouter = Router();
 adminRouter.post('/post', async (req, res) => {
 
     try {
-        model.addAdministrator(req.body.name, req.body.birthDate)
+        await model.addAdministrator(req.body.name, req.body.birthDate)
 
         res.status(200)
     }
@@ -21,7 +21,7 @@ adminRouter.post('/post', async (req, res) => {
 //Get by ID Method
 adminRouter.get('/get/:id', async (req, res) => {
     try{
-        const data = model.getAdministrator(req.params.id)
+        const data = await model.getAdministrator(req.params.id)
         res.json(data)
     }
     catch(error){
@@ -34,7 +34,7 @@ adminRouter.get('/get/:id', async (req, res) => {
 //Delete by ID Method
 adminRouter.delete('/delete/:id', async (req, res) => {
     try {
-        model.deleteAdministrator(req.params.id)
+        await model.deleteAdministrator(req.params.id)
         res.send(`Document with ${req.params.id} has been deleted..`)
     }
     catch (error) {

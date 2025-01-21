@@ -1,0 +1,72 @@
+.landing-container {
+  font-family: Arial, sans-serif;
+  position: relative;
+  background-color:beige;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center; /* Centre le texte dans les éléments */
+  justify-content: space-between;
+}
+h1 {
+  margin: 0; /* Supprime la marge par défaut */
+  font-size: 2.5rem; /* Taille de police pour le titre */
+}
+
+p {
+  margin: 20px 0; /* Marge pour espacer le texte du titre */
+  font-size: 1.2rem; /* Taille de police pour le slogan */
+  font-style: italic; /* Italique pour le style de slogan */
+  color: #555; /* Couleur pour le slogan */
+}
+
+.top-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button, .overlay-button {
+  background-color: #4ad8e6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.middle-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-grow: 1;
+  gap: 20px;
+}
+
+.left-box {
+  width: 300px;
+  height: 400px;
+  background-image: url(../img/registration.png);
+  background-size: cover; /* Pour couvrir toute la boîte */
+  background-position: center; /* Centrer l'image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  position: relative; /* Pour le positionnement des éléments enfants */
+}
+
+.right-box {
+  width: 300px;
+  height: 400px;
+  background-image: url(../img/resultat.png);
+  background-size: cover; /* Pour couvrir toute la boîte */
+  background-position: center; /* Centrer l'image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border-color: black;
+  position: relative; /* Pour le positionnement des éléments enfants */
+}

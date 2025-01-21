@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import { sendData } from './socketStreamManager';
+import { sendData } from './socketStreamManager.js';
 
-import { CountBureauPerParty } from '../database/model/countBureauPerParty';
+import { CountBureauPerParty } from '../database/model/countBureauPerParty.js';
 const model = new CountBureauPerParty(); 
 
 const resultRouter = Router();
@@ -12,7 +12,7 @@ resultRouter.post('/post/:bureau', async (req, res) => {
 
     try {
 
-       dataSaved =  model.countVotes(req.params.bureau, req.body.party, req.body.count)
+       dataSaved =  await model.countVotes(req.params.bureau, req.body.party, req.body.count)
 
         res.status(200).json(dataSaved)
     }

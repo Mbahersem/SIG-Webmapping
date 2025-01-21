@@ -1,0 +1,101 @@
+.login-container {
+  display: flex;
+  width: 100%; /* Prend toute la largeur de l'écran */
+  height: 100vh; /* Prend toute la hauteur de l'écran */
+}
+
+.left-side {
+  flex: 1; /* Prend la moitié gauche de l'écran */
+  background-image: url(../img/register.png);
+  background-size: cover; /* Pour couvrir toute la boîte */
+  background-position: center; /* Centrer l'image */
+  border-radius: 10px 0 0 10px; /* Bords arrondis à gauche */
+  display: flex;
+  align-items: center; /* Centre le contenu verticalement */
+  justify-content: center; /* Centre le contenu horizontalement */
+  color: white; /* Couleur du texte dans la partie gauche */
+  font-size: 1.5rem; /* Taille de la police */
+  text-align: center; /* Centre le texte */
+}
+
+.login-box {
+  flex: 1; /* Prend la moitié droite de l'écran */
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(154, 227, 240, 0.8); /* Couleur avec transparence */
+  border-radius: 0 10px 10px 0; /* Bords arrondis à droite */
+}
+
+.profile-image {
+  margin-bottom: 1rem;
+}
+
+.profile-img {
+  width: 80px; /* Corrigé pour inclure 'px' */
+  height: 80px; /* Corrigé pour inclure 'px' */
+  border-radius: 50%;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+  width: 100%; /* Prend toute la largeur */
+}
+
+input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem; /* Taille de la police */
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Espace entre les boutons */
+  width: 100%; /* Prend toute la largeur */
+}
+
+.button-group .btn {
+  padding: 0.8rem 1.5rem; /* Espacement autour du texte */
+  border: none; /* Pas de bordure */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur de main sur hover */
+  transition: background-color 0.3s; /* Transition pour un effet smooth */
+}
+
+.button-group .btn.download {
+  background-color: #007bff; /* Couleur de fond pour télécharger */
+  color: white; /* Couleur du texte */
+}
+
+.button-group .btn.download:hover {
+  background-color: #0056b3; /* Couleur au survol */
+}
+
+.button-group .btn.save {
+  background-color: #28a745; /* Couleur de fond pour enregistrer */
+  color: white; /* Couleur du texte */
+}
+
+.button-group .btn.save:hover {
+  background-color: #218838; /* Couleur au survol */
+}
+
+.links {
+  display: flex;
+  flex-direction: column; /* Aligne les éléments en colonne */
+  margin-top: 20px; /* Espace au-dessus des liens */
+}
+
+.links a {
+  margin: 5px 0; /* Marge entre les liens */
+  text-decoration: none; /* Supprime le soulignement */
+  color: #007bff; /* Couleur des liens */
+}
+
+.links a:hover {
+  text-decoration: underline; /* Soulignement au survol */
+}

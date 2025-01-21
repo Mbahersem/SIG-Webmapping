@@ -1,13 +1,13 @@
 import dotenv from 'dotenv';
 dotenv.config({ path: '../.env' });
 
-import { addClient } from './socketStreamManager';
+import { addClient } from './socketStreamManager.js';
 
 import { Server } from 'socket.io';
 import { createServer } from 'http';
 const io = new Server(createServer().listen(Number(process.env.SOCKETPORT)));
 
-import { CountBureauPerParty } from '../database/model/countBureauPerParty';
+import { CountBureauPerParty } from '../database/model/countBureauPerParty.js';
 const model = new CountBureauPerParty(); 
 
 var clients = []
