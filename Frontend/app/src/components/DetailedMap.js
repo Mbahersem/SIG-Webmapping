@@ -14,7 +14,25 @@ const ZoomControl = ({ setZoom }) => {
         });
     }, [map, setZoom]);
     return null;
-}
+}  
+
+
+const colors = ['green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'red', 'orange', 'yellow', 'blue'];
+    const colorMap = {}; 
+
+    const getUniqueColor = (featureId) => {
+    	if (!colorMap[featureId]) {
+            const colorIndex = Math.floor(Math.random() * colors.length);
+            const color = colors[colorIndex];
+
+            colorMap[featureId] = color;
+        }
+        
+        return colorMap[featureId];
+    };
+    
+    
+    
 
 const DetailedMap = () => {
     const position = [7.3697, 10.3547]; // Coordonnées du Cameroun
@@ -25,6 +43,9 @@ const DetailedMap = () => {
     const [departementsData, setDepartementsData] = useState(null);
     const [arrondissementsData, setArrondissementsData] = useState(null);
     
+    
+    
+  
     
 
 
@@ -57,7 +78,8 @@ const DetailedMap = () => {
     }, []);
 
     const styleFeature = (feature) => ({
-        color: 'blue',
+
+        color: getUniqueColor(feature.properties.shapeName),
         weight: 2,
         fillOpacity: 0.5,
     });
@@ -68,10 +90,11 @@ const DetailedMap = () => {
                 const layer = e.target;
                 layer.setStyle({
                     weight: 5,
-                    color: 'orange',
-                    fillOpacity: 0.7,
+                    color: 'grey',
+                    fillOpacity: 0.8,
                 });
                 layer.bringToFront();
+                
             },
             mouseout: (e) => {
                 const layer = e.target;
