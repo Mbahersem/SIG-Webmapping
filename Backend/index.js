@@ -8,8 +8,16 @@ import { resultRouter } from './api/resultRoutes.js';
 
 const app = express();
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'content-type, authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT');
+    res.setHeader('Control-Origin-Opener-Policy', 'Same-origin-allow-popups');
+    next();
+});
+
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 app.use('/api/v1/challenger', challengerRouter);
 app.use('/api/v1/bureau', bureauRouter);

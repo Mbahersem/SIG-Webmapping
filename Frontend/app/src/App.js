@@ -29,7 +29,7 @@ function App() {
         <Route path="/LoginPage" element={<Connexion />} /> {/* Page de connexion */}
         <Route path="/RegistrationPage" element={<Inscription />} /> {/* Page d'inscription */}
         <Route path="/ResultsPage" element={<Resultats />} /> {/* Page des résultats */}
-        {/* <Route path="/Map" element={<Map />} /> */}
+        <Route path="/Map" element={<Map />} />
       </Routes>
     </Router>
     // <div style={{ height: '100vh', width: '100vw' }}>

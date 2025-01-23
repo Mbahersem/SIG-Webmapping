@@ -64,7 +64,7 @@ const DetailedMap = () => {
 
         	fetch(`/geojson/geoBoundaries-CMR-ADM${fileNumber}_simplified.geojson`)
         	     .then(response => response.json())
-        	     .then(data => {setData(data);console.log(data);})
+        	     .then(data => setData(data))
         	     .catch(error => console.error('Error fetching GeoJSON:',error));
         	return null;
              
