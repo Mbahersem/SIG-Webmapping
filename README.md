@@ -9,9 +9,3 @@ SIG-Webmapping
     |-- BD
 |-- Frontend
 ```
-
-## Backend
-Pour le moment, on a les dossiers de l'API et de la base de données.
-
-## Frontend
-Bon...

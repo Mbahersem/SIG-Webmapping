@@ -1,48 +1,63 @@
--- Ensure the PostGIS extension is installed
-CREATE EXTENSION IF NOT EXISTS postgis;
+-- Création de la base de données (à exécuter dans un terminal PostgreSQL)
+CREATE DATABASE election_db;
 
--- Create the Voter table
-CREATE TABLE Voter (
-    voter_id SERIAL PRIMARY KEY,
-    last_name VARCHAR(100) NOT NULL,
-    first_name VARCHAR(100) NOT NULL,
-    id_card VARCHAR(50) NOT NULL UNIQUE,
-    registration_date DATE NOT NULL,
-    birth_date DATE NOT NULL,
-    has_voted BOOLEAN DEFAULT FALSE,
-    polling_station_name VARCHAR(100),
-    FOREIGN KEY (polling_station_name) REFERENCES Polling_Station(name)
+-- Connexion à la base de données
+c election_db;
+
+-- Activation de l'extension PostGIS
+CREATE EXTENSION postgis;
+
+-- Table Electeur
+CREATE TABLE Electeur (
+    id_elec SERIAL PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    prenom VARCHAR(100) NOT NULL,
+    id_cni VARCHAR(50) NOT NULL UNIQUE,
+    date_insc DATE NOT NULL,
+    date_naiss DATE NOT NULL,
+    vote BOOLEAN DEFAULT FALSE,
+    nom_bureau VARCHAR(100),
+    FOREIGN KEY (nom_bureau) REFERENCES Bureau_de_vote(nom)
 );
 
--- Create the Polling_Station table
-CREATE TABLE Polling_Station (
-    name VARCHAR(100) PRIMARY KEY,
-    district VARCHAR(100) NOT NULL,
-    geom GEOMETRY(Point, 4326) -- Using WGS 84 coordinate system
+-- Table Scrutateur
+CREATE TABLE Scrutateur (
+    id_scrut SERIAL PRIMARY KEY,
+    nom_scrut VARCHAR(100) NOT NULL,
+    date_naiss_scrut DATE NOT NULL,
+    nom_bureau VARCHAR(100),
+    id_admin INT,
+    FOREIGN KEY (nom_bureau) REFERENCES Bureau_de_vote(nom),
+    FOREIGN KEY (id_admin) REFERENCES Administrateur(id_admin)
 );
 
--- Constraint on the geometry of the Polling_Station
-ALTER TABLE Polling_Station
-ADD CONSTRAINT polling_station_geom_point_chk
-CHECK (ST_GeometryType(geom) = 'ST_Point'::text
-OR geom is NULL);
-
--- Create the Party table
-CREATE TABLE Party (
-    party_id SERIAL PRIMARY KEY,
-    party_name VARCHAR(100) NOT NULL,
-    candidate VARCHAR(100) NOT NULL
+-- Table Administrateur
+CREATE TABLE Administrateur (
+    id_admin SERIAL PRIMARY KEY,
+    nom_admin VARCHAR(100) NOT NULL,
+    date_naiss_admin DATE NOT NULL
 );
 
--- Create the Count_Polling_Station_Party table
-CREATE TABLE Count_Polling_Station_Party (
-    polling_station_name VARCHAR(100),
-    party_id INT,
-    vote_count INT DEFAULT 0,
-    PRIMARY KEY (polling_station_name, party_id),
-    FOREIGN KEY (polling_station_name) REFERENCES Polling_Station(name),
-    FOREIGN KEY (party_id) REFERENCES Party(party_id)
+-- Table Bureau_de_vote
+CREATE TABLE Bureau_de_vote (
+    nom VARCHAR(100) PRIMARY KEY,
+    arrondissement VARCHAR(100),
+    geom GEOMETRY(Point, 4326) -- Utilisation du système de coordonnées WGS 84
 );
 
--- Index to improve performance on spatial queries
-CREATE INDEX idx_geom ON Polling_Station USING GIST(geom);
+-- Table Candidat
+CREATE TABLE Candidat (
+    id_parti SERIAL PRIMARY KEY,
+    nom_parti VARCHAR(100) NOT NULL,
+    nom_candidat VARCHAR(100) NOT NULL
+);
+
+-- Table Compter_bureau_parti
+CREATE TABLE Compter_bureau_parti (
+    nom_bureau VARCHAR(100),
+    id_parti INT,
+    nombre_voies INT DEFAULT 0,
+    PRIMARY KEY (nom_bureau, id_parti),
+    FOREIGN KEY (nom_bureau) REFERENCES Bureau_de_vote(nom),
+    FOREIGN KEY (id_parti) REFERENCES Candidat(id_parti)
+);
